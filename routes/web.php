@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,11 @@ Route::prefix('/admin')
     ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('/', [HomeController::class, 'admin'])->name('admin/dashboard');
+    });
+
+Route::prefix('/user')
+    ->middleware(['auth', 'you'])
+    ->group(function () {
+        Route::get('/{id}', [UserController::class, 'user']);
+        Route::get('/password/{id}', [UserController::class, 'password']);
     });
